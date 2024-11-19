@@ -7,7 +7,7 @@ class AppTheme {
   static const Color black = Color(0xff303030);
   static const Color lightBlack = Color(0xff4F5A69);
   static const Color white = Color(0xffffffff);
-  static const Color gray = Color(0xffC8C9CB);
+  static const Color gray = Color(0xff79828B);
   static const Color red = Color(0xffC91C22);
   static const Color blue = Color(0xff003E90);
   static const Color pink = Color(0xffED1E79);
@@ -17,7 +17,7 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: primary,
       foregroundColor: white,
       centerTitle: true,
@@ -27,10 +27,13 @@ class AppTheme {
         color: white,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(32),
+          bottomRight: Radius.circular(32),
+        ),
       ),
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
