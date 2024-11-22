@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/models/source_model.dart';
+import 'package:news_app/models/sources_response/source.dart';
 import 'package:news_app/news/news_list.dart';
 import 'package:news_app/tabs/tab_item.dart';
 
 class SourcesTabs extends StatefulWidget {
-  final List<SourceModel> sources;
+  final List<Source> sources;
   const SourcesTabs({super.key, required this.sources});
 
   @override
@@ -41,7 +41,10 @@ class _SourcesTabsState extends State<SourcesTabs> {
                 .toList(),
           ),
         ),
-        Expanded(child: NewsList()),
+        Expanded(
+            child: NewsList(
+          sourceId: widget.sources[selectedTabIndex].id,
+        )),
       ],
     );
   }

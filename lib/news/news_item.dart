@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/app_theme.dart';
+import 'package:news_app/models/news_response/news.dart';
 import 'package:news_app/widgets/loading_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
-  const NewsItem({super.key});
+  final News news;
+  const NewsItem({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class NewsItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: CachedNetworkImage(
-              imageUrl:
+              imageUrl: news.urlToImage ??
                   'https://www.iisertvm.ac.in/assets/images/placeholder.jpg',
               height: MediaQuery.of(context).size.height * 0.25,
               width: double.infinity,
@@ -32,19 +34,19 @@ class NewsItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'BBC news',
+            news.source?.name ?? '',
             style:
                 titleSmallStyle?.copyWith(color: AppTheme.gray, fontSize: 10),
           ),
           const SizedBox(height: 4),
           Text(
-            "Why are football's biggest clubs starting a new tournament?",
+            news.title ?? '',
             style: titleSmallStyle?.copyWith(fontWeight: FontWeight.w500),
           ),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              timeago.format(fifteenAgo),
+              timeago.format(news.publishedAt!),
               style:
                   titleSmallStyle?.copyWith(color: AppTheme.gray, fontSize: 13),
             ),
