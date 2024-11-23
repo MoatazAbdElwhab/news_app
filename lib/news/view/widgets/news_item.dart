@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/app_theme.dart';
-import 'package:news_app/models/news_response/news.dart';
-import 'package:news_app/widgets/loading_indicator.dart';
+import 'package:news_app/shared/app_theme.dart';
+import 'package:news_app/news/data/models/news.dart';
+import 'package:news_app/shared/widgets/loading_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
@@ -12,7 +12,6 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle? titleSmallStyle = Theme.of(context).textTheme.titleSmall;
-    final fifteenAgo = DateTime.now().subtract(Duration(minutes: 15));
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
