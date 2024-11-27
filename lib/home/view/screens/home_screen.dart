@@ -12,6 +12,7 @@ import 'package:news_app/categories/data/models/category_model.dart';
 import 'package:news_app/settings/view/widgets/settings_tab.dart';
 import 'package:news_app/shared/widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+
     return Container(
       decoration: const BoxDecoration(
         color: AppTheme.white,
@@ -51,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedCategory != null
                 ? selectedCategory!.name
                 : selectedItem == DrawerItem.categories
-                    ? 'News App'
-                    : 'Settings',
+                    ? appLocalizations.newsApp
+                    : appLocalizations.settings,
           ),
         ),
         drawer: HomeDrawer(
@@ -145,12 +148,13 @@ class CustomSearch extends SearchDelegate {
   Timer? _debounce;
   @override
   Widget buildSuggestions(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     final newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
     NewsViewModel.pageSearchNumber = 1;
     print(NewsViewModel.pageSearchNumber);
     if (query == '') {
-      return const Center(
-        child: Text('Please enter text to search'),
+      return Center(
+        child: Text(appLocalizations.enterText),
       );
     } else {
       if (_debounce?.isActive ?? false) _debounce!.cancel();

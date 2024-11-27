@@ -1,0 +1,15 @@
+{
+    "newsApp":"تطبيق الاخبار",
+    "pickCategory": "اختر فئة اهتمامك",
+    "sports": "الرياضة",
+    "entertainment": "ترفيه",
+    "health": "صحة",
+    "business": "عمل",
+    "technology": "تكنولوجيا",
+    "science": "علوم",
+    "categories": "الفئات",
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "search": "ابحث",
+    "enterText": "الرجاء إدخال نص للبحث"
+}

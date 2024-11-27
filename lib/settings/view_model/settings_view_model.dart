@@ -7,7 +7,7 @@ class SettingsViewModel with ChangeNotifier {
   }
 
   ThemeMode themeMode = ThemeMode.light;
-  String languageCode = 'en';
+  String languageCode = 'ar';
 
   // bool get isDark => themeMode == ThemeMode.dark;
 

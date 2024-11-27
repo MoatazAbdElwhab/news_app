@@ -3,6 +3,7 @@ import 'package:news_app/news/view_model/news_view_model.dart';
 import 'package:news_app/shared/app_theme.dart';
 import 'package:news_app/categories/view/widgets/category_item.dart';
 import 'package:news_app/categories/data/models/category_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoriesGrid extends StatelessWidget {
   final void Function(CategoryModel) onCategorySelected;
@@ -10,40 +11,41 @@ class CategoriesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     List<CategoryModel> categories = [
       CategoryModel(
         id: 'sports',
-        name: 'Sports',
+        name: appLocalizations.sports,
         imageName: 'sports',
         color: AppTheme.red,
       ),
       CategoryModel(
         id: 'entertainment',
-        name: 'Entertainment',
+        name: appLocalizations.entertainment,
         imageName: 'politics',
         color: AppTheme.blue,
       ),
       CategoryModel(
         id: 'health',
-        name: 'Health',
+        name: appLocalizations.health,
         imageName: 'health',
         color: AppTheme.pink,
       ),
       CategoryModel(
         id: 'business',
-        name: 'Business',
+        name: appLocalizations.business,
         imageName: 'bussines',
         color: AppTheme.brown,
       ),
       CategoryModel(
         id: 'technology',
-        name: 'Technology',
+        name: appLocalizations.technology,
         imageName: 'environment',
         color: AppTheme.lightBlue,
       ),
       CategoryModel(
         id: 'science',
-        name: 'Science',
+        name: appLocalizations.science,
         imageName: 'science',
         color: AppTheme.yellow,
       ),
@@ -55,7 +57,7 @@ class CategoriesGrid extends StatelessWidget {
         children: [
           const SizedBox(height: 24),
           Text(
-            'Pick your category\nof interest',
+            appLocalizations.pickCategory,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: AppTheme.lightBlack,
                 ),

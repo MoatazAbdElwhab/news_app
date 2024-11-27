@@ -37,21 +37,5 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         },
       ),
     );
-
-    // FutureBuilder(
-    //   future: ApiService.getSources(selectedCategoryId),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const LoadingIndicator();
-    //     } else if (snapshot.hasError || snapshot.data?.status != 'ok') {
-    //       return const ErrorIndicator();
-    //     } else {
-    //       final sources = snapshot.data?.sources;
-    //       return SourcesTabs(
-    //         sources: sources!,
-    //       );
-    //     }
-    //   },
-    // );
   }
 }
