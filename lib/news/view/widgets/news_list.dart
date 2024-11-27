@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/news/view/screens/news_details_screen.dart';
 import 'package:news_app/news/view/widgets/news_item.dart';
 import 'package:news_app/news/view_model/news_view_model.dart';
 import 'package:news_app/shared/widgets/error_indicator.dart';
@@ -14,6 +15,7 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
+  ScrollController scrollController = ScrollController();
   final viewModel = NewsViewModel();
   @override
   Widget build(BuildContext context) {
@@ -29,35 +31,29 @@ class _NewsListState extends State<NewsList> {
               message: viewModel.errorMessage!,
             );
           } else {
-            return ListView.builder(
-              itemBuilder: (_, index) =>
-                  NewsItem(news: viewModel.newsList[index]),
-              itemCount: viewModel.newsList.length,
+            return NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                if (notification.metrics.pixels ==
+                        notification.metrics.maxScrollExtent &&
+                    notification is ScrollUpdateNotification) {
+                  viewModel.getNews(widget.sourceId, loadingPagination: true);
+                }
+                return true;
+              },
+              child: ListView.builder(
+                controller: scrollController,
+                itemBuilder: (_, index) => InkWell(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NewsDetailsScreen(
+                              news: viewModel.newsList[index],
+                            ))),
+                    child: NewsItem(news: viewModel.newsList[index])),
+                itemCount: viewModel.newsList.length,
+              ),
             );
           }
         },
       ),
     );
-
-    // FutureBuilder(
-    //   future: ApiService.getNews(sourceId),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return LoadingIndicator();
-    //     } else if (snapshot.hasError || snapshot.data?.status != 'ok') {
-    //       return ErrorIndicator(
-    //         message: '',
-    //       );
-    //     } else {
-    //       final news = snapshot.data?.news;
-    //       return ListView.builder(
-    //         itemBuilder: (_, index) => NewsItem(
-    //           news: news![index],
-    //         ),
-    //         itemCount: news?.length,
-    //       );
-    //     }
-    //   },
-    // );
   }
 }

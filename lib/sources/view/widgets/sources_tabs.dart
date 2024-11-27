@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/news/view_model/news_view_model.dart';
 import 'package:news_app/sources/data/models/source.dart';
 import 'package:news_app/news/view/widgets/news_list.dart';
 import 'package:news_app/sources/view/widgets/tab_item.dart';
@@ -22,6 +23,7 @@ class _SourcesTabsState extends State<SourcesTabs> {
           child: TabBar(
             onTap: (index) {
               selectedTabIndex = index;
+              NewsViewModel.pageNumber = 1;
               setState(() {});
             },
             dividerColor: Colors.transparent,

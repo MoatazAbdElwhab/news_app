@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/news/view_model/news_view_model.dart';
 import 'package:news_app/shared/app_theme.dart';
 import 'package:news_app/categories/view/widgets/category_item.dart';
 import 'package:news_app/categories/data/models/category_model.dart';
@@ -70,7 +71,10 @@ class CategoriesGrid extends StatelessWidget {
                 childAspectRatio: 0.92,
               ),
               itemBuilder: (context, index) => InkWell(
-                onTap: () => onCategorySelected(categories[index]),
+                onTap: () {
+                  onCategorySelected(categories[index]);
+                  NewsViewModel.pageNumber = 1;
+                },
                 child: CategoryItem(
                   category: categories[index],
                   index: index,
