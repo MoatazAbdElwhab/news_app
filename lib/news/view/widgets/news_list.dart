@@ -41,7 +41,6 @@ class _NewsListState extends State<NewsList> {
                 return true;
               },
               child: ListView.builder(
-                controller: scrollController,
                 itemBuilder: (_, index) => InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => NewsDetailsScreen(

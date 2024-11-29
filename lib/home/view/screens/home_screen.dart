@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:news_app/news/view/screens/news_details_screen.dart';
 import 'package:news_app/news/view/widgets/news_item.dart';
@@ -154,7 +153,10 @@ class CustomSearch extends SearchDelegate {
     print(NewsViewModel.pageSearchNumber);
     if (query == '') {
       return Center(
-        child: Text(appLocalizations.enterText),
+        child: Text(
+          appLocalizations.enterText,
+          style: TextStyle(fontSize: 26),
+        ),
       );
     } else {
       if (_debounce?.isActive ?? false) _debounce!.cancel();
