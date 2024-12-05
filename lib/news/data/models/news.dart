@@ -1,7 +1,7 @@
-import 'source.dart';
+import 'news_source.dart';
 
 class News {
-  final Source? source;
+  final NewsSource? source;
   final dynamic author;
   final String? title;
   final String? description;
@@ -24,7 +24,7 @@ class News {
   factory News.fromJson(Map<String, dynamic> json) => News(
         source: json['source'] == null
             ? null
-            : Source.fromJson(json['source'] as Map<String, dynamic>),
+            : NewsSource.fromJson(json['source'] as Map<String, dynamic>),
         author: json['author'] as dynamic,
         title: json['title'] as String?,
         description: json['description'] as String?,

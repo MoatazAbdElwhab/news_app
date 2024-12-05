@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/news/data/data_sources/news_data_source.dart';
 import 'package:news_app/news/data/models/news.dart';
+import 'package:news_app/news/data/repository/news_repository.dart';
+import 'package:news_app/shared/service_locator.dart';
 
 class NewsViewModel with ChangeNotifier {
-  final dataSource = NewsDataSource();
-
+  late final NewsRepository newsRepository;
+  NewsViewModel() {
+    newsRepository = NewsRepository(ServiceLocator.newsDataSource);
+  }
   List<News> newsList = [];
   List<News> newsSearchList = [];
   bool isLoading = false;
@@ -21,17 +24,10 @@ class NewsViewModel with ChangeNotifier {
     }
 
     try {
-      final response = await dataSource.getNews(sourceId, pageNumber);
-      if (response.status == 'ok' && response.news != null) {
-        pageNumber == 1
-            ? newsList = response.news!
-            : newsList.addAll(response.news!);
-        pageNumber++;
-      } else {
-        if (newsList.isEmpty) {
-          errorMessage = 'Failed to get news';
-        }
-      }
+      final news = await newsRepository.getNews(sourceId, pageNumber);
+
+      pageNumber == 1 ? newsList = news : newsList.addAll(news);
+      pageNumber++;
     } catch (error) {
       errorMessage = error.toString();
     }
@@ -48,18 +44,13 @@ class NewsViewModel with ChangeNotifier {
       notifyListeners();
     }
     try {
-      final response =
-          await dataSource.getSearchNews(pageSearchNumber, textSearch);
-      if (response.status == 'ok' && response.news != null) {
-        pageSearchNumber == 1
-            ? newsSearchList = response.news!
-            : newsSearchList.addAll(response.news!);
-        pageSearchNumber++;
-      } else {
-        if (newsSearchList.isEmpty) {
-          errorMessage = 'Failed to get news';
-        }
-      }
+      final news =
+          await newsRepository.getSearchNews(pageSearchNumber, textSearch);
+
+      pageSearchNumber == 1
+          ? newsSearchList = news
+          : newsSearchList.addAll(news);
+      pageSearchNumber++;
     } catch (error) {
       errorMessage = error.toString();
     }
